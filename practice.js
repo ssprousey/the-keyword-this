@@ -23,22 +23,38 @@
   //email --> which is a string
   //getUsername --> which is a function that returns the current object's username property. *Don't use 'user' instead use the 'this' keyword*
 
-    //Code Here
-
+var user = {
+  username: 'username',
+  email: 'email@dot.com',
+  getUsername: function() {
+    return this.username;
+  }
+};
 //Now, invoke the getUsername method and verify you got the username of the object and not anything else.
 
-
-//Next Problem
+user.username();
 
 
 // Write a constructor function, including method definitions, which will make the following function invocations function properly.
 
-  //Function Invocations Here
+function Car (make, model, year){
+  this.make = make;
+  this.model = model;
+  this.year = year;
+};
 
 var prius = new Car('Toyota', 'Prius', 2011);
 var mustang = new Car('Ford', 'Mustang', 2013);
 
 //Hint, you'll need to add a move property, with a starting value of zero, and write a moveCar function which will increment the move property by 10. The move property will be added to every object that is being returned from the Car function. You'll also need to use the 'this' keyword properly in order to make sure you're invoking moveCar on the right object (prius vs mustang).
+
+Car.move = 0;
+
+var moveCar = function () {
+  return this.move + 10;
+}
+
+
 
 prius.moveCar(); //increments prius' move property by 10. Returns the new move property.
 mustang.moveCar(); //increments mustang' move property by 10. Returns the new move property.
@@ -51,6 +67,8 @@ var getYear = function(){
   return this.year;
 };
 
+prius.getYear();
+mustang.getYear();
 //Above you're given the getYear function. Call the getYear function with the prius then the mustang objects being the focal objects. *Don't add getYear as a property on both objects*.
 
 //Note(no tests)
@@ -69,7 +87,8 @@ var getMyUsername = function() {
  return this.username;
 };
 
-var userName = getMyUsername(); //Fix this
+var userName = getMyUsername.call(myUser);
+userName;
 
 //Above you're given an object, and  a function. What will the getMyUsername function return?
 //Note(no tests)
@@ -81,4 +100,3 @@ var userName = getMyUsername(); //Fix this
 
 
 //Fix the getMyUsername invocation (stored in the userName variable, at the bottom of the above code) so that userName will be equal to 'iliketurtles'.
-
